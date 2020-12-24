@@ -1,10 +1,16 @@
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 module.exports = {
+  entry: "./src/index.tsx",
+  // Локальный сервер
   devServer: {
-    contentBase: path.join(__dirname, "./dist"),
+    contentBase: path.join(__dirname, "dist"),
     port: 8080,
   },
+  // Оптимизация
+
   module: {
     rules: [
       {
@@ -55,7 +61,19 @@ module.exports = {
     extensions: [".tsx", ".ts", ".js"],
   },
   plugins: [
+    // Копирование
+    new CopyPlugin({
+      patterns: [{ from: "./src", to: "static" }],
+    }),
+    // ХТМЛ
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, "src", "index.html"),
+    }),
     // Очистка говна
     new CleanWebpackPlugin(),
   ],
+  output: {
+    filename: "[name].[contenthash].js",
+    path: path.resolve(__dirname, "dist"),
+  },
 };

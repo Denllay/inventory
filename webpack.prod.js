@@ -1,6 +1,5 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const Base = require("./webpack.base");
@@ -24,19 +23,12 @@ module.exports = merge(Base, {
       }),
     ],
   },
-  plugins: [
-    new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" }),
-    new CleanWebpackPlugin(),
-  ],
+  plugins: [new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" })],
   module: {
     rules: [
       {
         test: /\.scss$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          "css-loader", //2. Turns css into commonjs
-          "sass-loader", //1. Turns sass into css
-        ],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
     ],
   },
