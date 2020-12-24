@@ -1,0 +1,37 @@
+.header__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 70%;
+  margin: 0 auto;
+  font-family: "Montserrat", sans-serif;
+}
+.header__list {
+  display: flex;
+}
+.hedaer__logo {
+  font-weight: 700;
+}
+.header_container {
+  background: #ffffff;
+}
+.list__item {
+  position: relative;
+  cursor: pointer;
+  margin: 0px 15px;
+  font-size: 20px;
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: #505050;
+    transition: width 0.3s ease;
+  }
+  &:hover::after,
+  &:focus:active {
+    width: 100%;
+  }
+}
