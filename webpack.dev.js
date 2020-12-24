@@ -2,9 +2,8 @@ const path = require("path");
 const { default: merge } = require("webpack-merge");
 const CopyPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-
 const Base = require("./webpack.base");
-module.exports = merge(Base, {
+module.exports = {
   mode: "development",
   devServer: {
     contentBase: path.join(__dirname, "./dist"),
@@ -24,4 +23,4 @@ module.exports = merge(Base, {
     filename: "[name].js",
     path: path.resolve(__dirname, "./dist"),
   },
-});
+};
