@@ -1,17 +1,17 @@
-import React from "react";
+import React, { SyntheticEvent } from "react";
 import s from "./HeaderModal.module.scss";
 interface IProps {
   modal: string;
-  OnclickModal(e: any): void;
+  onClickModal(e: SyntheticEvent): void;
 }
 
-export const HeaderModal: React.FC<IProps> = ({ modal, OnclickModal }) => {
+export const HeaderModal: React.FC<IProps> = ({ modal, onClickModal }) => {
   return (
     <div
       className={
         modal !== "none" ? `${s.modal}` : `${s.modal} ${s.display_none}`
       }
-      onClick={OnclickModal}
+      onClick={onClickModal}
       id="modal"
     >
       <div className={s.container}>
