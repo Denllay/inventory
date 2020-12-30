@@ -1,5 +1,5 @@
-import React, { SyntheticEvent } from "react";
-import s from "./Nav.module.scss";
+import React, { SyntheticEvent } from 'react';
+import s from './Nav.module.scss';
 
 interface INav {
   onClick(e: SyntheticEvent): void;
