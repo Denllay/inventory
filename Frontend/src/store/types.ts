@@ -1,1 +1,1 @@
-export const AUTH_REGISTR: string = 'AUTH_REGISTR';
+export type Actions = 'PING' | 'AUTH_REGISTR';

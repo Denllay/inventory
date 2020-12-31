@@ -1,16 +1,18 @@
 import axios from 'axios';
-import { AUTH_REGISTR } from '../types';
-interface Idispatch {
-  type: string;
-  payload: string;
-}
-export const ping = () => async (dispatch: any) => {
+import { ThunkAction } from 'redux-thunk'; // <---
+
+type PingAction = {
+  type: 'PING';
+  payload: any;
+};
+
+export const ping = (): ThunkAction<void, any, any, PingAction> => async (dispatch) => {
   try {
     const { data } = await axios.get('http://localhost:3051/ping');
     console.log(data);
 
     dispatch({
-      type: AUTH_REGISTR,
+      type: 'PING',
       payload: data,
     });
   } catch (error) {

@@ -1,20 +1,22 @@
 import React, { SyntheticEvent } from 'react';
-import s from './Nav.module.scss';
+import styles from './Nav.module.scss';
+import { ModalTypes } from '../../types/modals';
 
 interface INav {
   onClick(e: SyntheticEvent): void;
 }
+
 export const Nav: React.FC<INav> = ({ onClick }) => {
   return (
-    <div className={s.header_container}>
-      <div className={s.header__inner}>
-        <h1 className={s.header__logo}>Inventory</h1>
+    <div className={styles.header_container}>
+      <div className={styles.header__inner}>
+        <h1 className={styles.header__logo}>Inventory</h1>
         <nav>
-          <ul className={s.header__list}>
-            <li className={s.list__item} id="singUp" onClick={onClick}>
+          <ul className={styles.header__list}>
+            <li className={styles.list__item} data-modal-name={'sign-up' as ModalTypes} onClick={onClick}>
               Sing up
             </li>
-            <li className={s.list__item} id="logIn" onClick={onClick}>
+            <li className={styles.list__item} data-modal-name={'login' as ModalTypes} onClick={onClick}>
               Log in
             </li>
           </ul>

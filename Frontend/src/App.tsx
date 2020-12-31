@@ -1,22 +1,21 @@
 import React, { SyntheticEvent, useState } from 'react';
 import { Nav } from './components/Nav/Nav';
-import s from './App.module.scss';
+import styles from './App.module.scss';
 import { HeaderModal } from './components/HeaderModal/HeaderModal';
-import { ping } from './store/actions/Ping';
-import { useDispatch } from 'react-redux';
+import { ModalTypes } from './types/modals';
+
 export const App: React.FC = () => {
-  const dispatch = useDispatch();
-  const [modal, setModal] = useState('none');
+  const [modal, setModal] = useState<ModalTypes | null>(null);
   const onClickModal = (e: SyntheticEvent): void => {
-    setModal(e.target['id']);
+    const type = (e.target as HTMLDivElement).dataset['modalName'] as ModalTypes;
+    setModal(type);
   };
-  dispatch(ping()); // TEST
   const onHiddenModal = (e: SyntheticEvent) => {
-    e.target['id'] !== 'modal' ? false : setModal('none');
+    (e.currentTarget as HTMLDivElement).dataset['close'] === 'modal' && setModal(null);
   };
   return (
     <div className="wrapper">
-      <header className={s.header}>
+      <header className={styles.header}>
         <Nav onClick={onClickModal} />
         <HeaderModal modal={modal} onClickModal={onHiddenModal} />
       </header>
