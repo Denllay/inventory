@@ -9,7 +9,7 @@ const initialState: IState = {
   ping: false,
 };
 
-export const auth = (state = initialState, action: Action<Actions>) => {
+export const Ping = (state = initialState, action: Action<Actions>) => {
   switch (action.type) {
     case 'PING':
       return { ping: true };

@@ -1,0 +1,24 @@
+.header__list {
+  display: flex;
+}
+.list__item {
+  font-family: 'Montserrat', sans-serif;
+  position: relative;
+  cursor: pointer;
+  margin: 0px 15px;
+  font-size: 23px;
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: #505050;
+    transition: width 0.3s ease;
+  }
+  &:hover::after,
+  &:focus:active {
+    width: 100%;
+  }
+}
