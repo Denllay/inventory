@@ -1,33 +1,55 @@
 import React, { SyntheticEvent, useEffect, useState } from 'react';
 import { Nav } from './components/Nav/Nav';
 import styles from './App.module.scss';
-import { HeaderModal } from './components/HeaderModal/HeaderModal';
+import { HeaderModal } from './components/AuthModal/AuthModal';
 import { ModalTypes } from './types/modals';
 import { navContext } from './Context/NavContext';
 import { useDispatch } from 'react-redux';
 import { CheckAuth } from './store/actions/CheckAuth';
+import { SingOutModal } from './components/SingOutModal/SingOutModal';
+import { SingOut } from './store/actions/SingOut';
+import axios from 'axios';
 export const App: React.FC = () => {
   const dispatch = useDispatch();
-  const [modal, setModal] = useState<ModalTypes | null>(null);
-  const onClickModal = (e: SyntheticEvent): void => {
+  /// MODAL ///
+  const [modalAuth, setModalAuth] = useState<ModalTypes | null>(null);
+  const [modalSingOut, setModalSingOut] = useState<boolean>(false);
+  /// ### MODAL ### ///
+  const onHiddenModalSingOut = (e: SyntheticEvent): void => {
+    e.target['id'] === 'modal' && setModalSingOut(false);
+  };
+  const onClickModalSingOut = () => {
+    setModalSingOut(true);
+  };
+  const clickYes = (): void => {
+    dispatch(SingOut());
+    setModalSingOut(false);
+  };
+  // Modal Auth
+  const onClickModalAuth = (e: SyntheticEvent): void => {
     const type = (e.target as HTMLDivElement).dataset['modalName'] as ModalTypes;
-    setModal(type);
+    setModalAuth(type);
   };
-  const onHiddenModal = (e: SyntheticEvent) => {
-    e.target['id'] === 'modal' && setModal(null);
+  const onHiddenModalAuth = (e: SyntheticEvent) => {
+    e.target['id'] === 'modal' && setModalAuth(null);
   };
-
+  const hiddenModalAuth = () => {
+    setModalAuth(null);
+  };
+  // ### Modal Auth ###
   useEffect(() => {
-    dispatch(CheckAuth());
+    localStorage.getItem('token') !== null && dispatch(CheckAuth());
   });
+  ///TEST
 
   return (
     <div className="wrapper">
       <header className={styles.header}>
-        <navContext.Provider value={onClickModal}>
+        <navContext.Provider value={{ onClickModalAuth, onClickModalSingOut }}>
           <Nav />
         </navContext.Provider>
-        <HeaderModal modal={modal} onClickModal={onHiddenModal} />
+        <HeaderModal modal={modalAuth} onClickModal={onHiddenModalAuth} hiddenModal={hiddenModalAuth} />
+        <SingOutModal modal={modalSingOut} onClickModal={onHiddenModalSingOut} clickYes={clickYes} />
       </header>
     </div>
   );

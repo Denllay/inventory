@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ThunkAction } from 'redux-thunk'; // <---
+import { ThunkAction } from 'redux-thunk';
 interface IPayload {
   email: string;
   password: string;
@@ -18,7 +18,6 @@ export const Login = (email: string, password: string): ThunkAction<void, any, a
       password,
     };
     const { data } = await axios.post('http://localhost:3051/auth', payload);
-    console.log(data);
 
     const userToken = data.data.jwt;
     localStorage.setItem('token', userToken);

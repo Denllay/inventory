@@ -1,13 +1,14 @@
-import React, { SyntheticEvent, useRef} from 'react';
-import styles from './HeaderModal.module.scss';
+import React, { SyntheticEvent, useRef } from 'react';
+import styles from './AuthModal.module.scss';
 import { ModalTypes } from '../../types/modals';
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 import { Ping } from '../../store/actions/Ping';
 import { Registr } from '../../store/actions/Registr';
 import { Login } from '../../store/actions/Login';
 interface IProps {
   modal: ModalTypes | null;
   onClickModal(e: SyntheticEvent): void;
+  hiddenModal(): void;
 }
 
 const translateModalType = (t: ModalTypes) =>
@@ -17,38 +18,40 @@ const translateModalType = (t: ModalTypes) =>
     login: 'Login',
   }[t]);
 
-export const HeaderModal: React.FC<IProps> = ({ modal, onClickModal }) => {
-  const emailRef = useRef<HTMLInputElement>(null)
-  const passwordRef = useRef<HTMLInputElement>(null)
-  const confPasswordRef = useRef<HTMLInputElement>(null)
-  const dispatch = useDispatch()
+export const HeaderModal: React.FC<IProps> = ({ modal, onClickModal, hiddenModal }) => {
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const confPasswordRef = useRef<HTMLInputElement>(null);
+  const dispatch = useDispatch();
   ////
-  const OnclickReg = (e:React.FormEvent):void=>{
-    e.preventDefault()
+  const OnclickReg = (e: React.FormEvent): void => {
+    // Регестрация
+    e.preventDefault();
     const emailValue = emailRef.current.value;
     const passwordValue = passwordRef.current.value;
     const confPasswordValue = confPasswordRef.current.value;
     ////
-    dispatch(Ping)
+    dispatch(Ping);
     ///
-    let emailStatus = /\w+@\w+\..+/i.test(emailValue) // Проверка email на валидность
-    let similarityPassword = passwordValue === confPasswordValue // Проверка паролей на сходство
-    if(emailStatus && passwordValue.length >= 6 && similarityPassword){
-      dispatch(Registr(emailValue,passwordValue))
-    }else{
+    let emailStatus = /\w+@\w+\..+/i.test(emailValue); // Проверка email на валидность
+    let similarityPassword = passwordValue === confPasswordValue; // Проверка паролей на сходство
+    if (emailStatus && passwordValue.length >= 6 && similarityPassword) {
+      dispatch(Registr(emailValue, passwordValue));
+    } else {
       console.log('введите данные правильно');
-
-    }     
-  }
-  const OnclickLogin = (e:React.FormEvent)=>{
-    e.preventDefault()
+    }
+  };
+  const OnclickLogin = (e: React.FormEvent) => {
+    // Логин
+    e.preventDefault();
     const emailValue = emailRef.current.value;
     const passwordValue = passwordRef.current.value;
-    let emailStatus = /\w+@\w+\..+/i.test(emailValue)
-    if(emailStatus && passwordValue.length >= 6){
-      dispatch(Login(emailValue,passwordValue))
+    let emailStatus = /\w+@\w+\..+/i.test(emailValue);
+    if (emailStatus && passwordValue.length >= 6) {
+      dispatch(Login(emailValue, passwordValue));
+      hiddenModal();
     }
-  }
+  };
   return (
     <div
       className={modal ? `${styles.modal}` : `${styles.modal} ${styles.display_none}`}

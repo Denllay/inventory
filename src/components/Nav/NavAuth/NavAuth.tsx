@@ -9,10 +9,10 @@ export const NavAuth: React.FC = () => {
   return (
     <nav>
       <ul className={styles.header__list}>
-        <li className={styles.list__item} data-modal-name={'sign-up' as ModalTypes} onClick={NavState}>
+        <li className={styles.list__item} data-modal-name={'sign-up' as ModalTypes} onClick={NavState.onClickModalAuth}>
           Sing up
         </li>
-        <li className={styles.list__item} data-modal-name={'login' as ModalTypes} onClick={NavState}>
+        <li className={styles.list__item} data-modal-name={'login' as ModalTypes} onClick={NavState.onClickModalAuth}>
           Log in
         </li>
       </ul>

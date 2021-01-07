@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ThunkAction } from 'redux-thunk'; // <---
+import { ThunkAction } from 'redux-thunk';
 interface IPayload {
   email: string;
   password: string;
