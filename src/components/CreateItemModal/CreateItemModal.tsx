@@ -24,6 +24,9 @@ export const CreateItemModal: React.FC<IProps> = ({ modal, onClickModal, hiddenM
       const cell = !!inventoryItems.length ? inventoryItems.reduce((acc, el) => (acc.b > el.b ? acc : el)).cell + 1 : 0;
       dispatch(CreateItem({ name, description, count: Number(count), cell, inventoryId: inventoryItems.userId }));
       hiddenModal(false);
+      setName('');
+      setDesc('');
+      setCount('');
     }
   };
   return (

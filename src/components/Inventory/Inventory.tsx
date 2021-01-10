@@ -9,9 +9,16 @@ export const Inventory: React.FC = () => {
     !!el && (acc[el.cell] = el);
     return acc;
   }, Array.from({ length: 30 }));
+
   const InventoryGridItem = items.map((el, index) =>
     el ? (
-      <InventoryItem key={`InventoryItem-${index}`} name={el.name} description={el.description} count={el.count} />
+      <InventoryItem
+        key={`InventoryItem-${index}`}
+        id={el.id}
+        name={el.name}
+        description={el.description}
+        count={el.count}
+      />
     ) : (
       <InventoryItem key={`InventoryItem-${index}`} />
     )

@@ -26,7 +26,7 @@ export const CreateItem = ({
         inventoryId: inventoryId,
       },
     ];
-    const { data } = await axios.post('http://localhost:3050/inventory', payload, {
+    await axios.post('http://localhost:3050/inventory', payload, {
       headers: {
         jwt: token,
       },

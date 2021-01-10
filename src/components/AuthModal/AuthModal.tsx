@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useRef } from 'react';
+import React, { SyntheticEvent, useState } from 'react';
 import styles from './AuthModal.module.scss';
 import { ModalTypes } from '../../types/modals';
 import { useDispatch } from 'react-redux';
@@ -19,23 +19,22 @@ const translateModalType = (t: ModalTypes) =>
   }[t]);
 
 export const HeaderModal: React.FC<IProps> = ({ modal, onClickModal, hiddenModal }) => {
-  const emailRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
-  const confPasswordRef = useRef<HTMLInputElement>(null);
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [confPassword, setConfPassword] = useState<string>('');
   const dispatch = useDispatch();
   ////
   const OnclickReg = (e: React.FormEvent): void => {
     // Регестрация
     e.preventDefault();
-    const emailValue = emailRef.current.value;
-    const passwordValue = passwordRef.current.value;
-    const confPasswordValue = confPasswordRef.current.value;
-    ///
-    let emailStatus = /\w+@\w+\..+/i.test(emailValue); // Проверка email на валидность
-    let similarityPassword = passwordValue === confPasswordValue; // Проверка паролей на сходство
-    if (emailStatus && passwordValue.length >= 6 && similarityPassword) {
-      dispatch(Registr(emailValue, passwordValue));
+    let emailStatus = /\w+@\w+\..+/i.test(email); // Проверка email на валидность
+    let similarityPassword = password === confPassword; // Проверка паролей на сходство
+    if (emailStatus && password.length >= 6 && similarityPassword) {
+      dispatch(Registr(email, password));
       hiddenModal();
+      setEmail('');
+      setPassword('');
+      setConfPassword('');
     } else {
       console.log('введите данные правильно'); // Change
     }
@@ -43,12 +42,12 @@ export const HeaderModal: React.FC<IProps> = ({ modal, onClickModal, hiddenModal
   const OnclickLogin = (e: React.FormEvent) => {
     // Логин
     e.preventDefault();
-    const emailValue = emailRef.current.value;
-    const passwordValue = passwordRef.current.value;
-    let emailStatus = /\w+@\w+\..+/i.test(emailValue);
-    if (emailStatus && passwordValue.length >= 6) {
-      dispatch(Login(emailValue, passwordValue));
+    let emailStatus = /\w+@\w+\..+/i.test(email);
+    if (emailStatus && password.length >= 6) {
+      dispatch(Login(email, password));
       hiddenModal();
+      setEmail('');
+      setPassword('');
     }
   };
   return (
@@ -60,13 +59,26 @@ export const HeaderModal: React.FC<IProps> = ({ modal, onClickModal, hiddenModal
       <div className={styles.container}>
         <h2 className={styles.container__title}>{translateModalType(modal)}</h2>
         <form className={styles.form} onSubmit={modal === 'sign-up' ? OnclickReg : OnclickLogin}>
-          <input type="text" placeholder="Email" className={styles.input} ref={emailRef} />
-          <input type="password" placeholder="Password" className={styles.input} ref={passwordRef} />
+          <input
+            type="text"
+            placeholder="Email"
+            className={styles.input}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            className={styles.input}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
           <input
             type="password"
             placeholder="Confirm password"
             className={modal === 'sign-up' ? `${styles.input}` : `${styles.display_none}`}
-            ref={confPasswordRef}
+            value={confPassword}
+            onChange={(e) => setConfPassword(e.target.value)}
           />
           <input type="submit" placeholder="Sing in" value="Submit" className={styles.submit} />
         </form>
