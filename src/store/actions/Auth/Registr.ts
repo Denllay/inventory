@@ -18,8 +18,7 @@ export const Registr = (email: string, password: string): ThunkAction<void, any,
       password,
       confirmPassword: password,
     };
-    const { data } = await axios.post('http://localhost:3051/register', payload);
-    console.log(data);
+    await axios.post('http://localhost:3051/register', payload);
 
     dispatch({
       type: 'AUTH_REGISTR',

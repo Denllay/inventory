@@ -2,9 +2,9 @@ import React, { SyntheticEvent, useRef } from 'react';
 import styles from './AuthModal.module.scss';
 import { ModalTypes } from '../../types/modals';
 import { useDispatch } from 'react-redux';
-import { Ping } from '../../store/actions/Ping';
-import { Registr } from '../../store/actions/Registr';
-import { Login } from '../../store/actions/Login';
+import { Registr } from '../../store/actions/Auth/Registr';
+import { Login } from '../../store/actions/Auth/Login';
+
 interface IProps {
   modal: ModalTypes | null;
   onClickModal(e: SyntheticEvent): void;
@@ -30,15 +30,14 @@ export const HeaderModal: React.FC<IProps> = ({ modal, onClickModal, hiddenModal
     const emailValue = emailRef.current.value;
     const passwordValue = passwordRef.current.value;
     const confPasswordValue = confPasswordRef.current.value;
-    ////
-    dispatch(Ping);
     ///
     let emailStatus = /\w+@\w+\..+/i.test(emailValue); // Проверка email на валидность
     let similarityPassword = passwordValue === confPasswordValue; // Проверка паролей на сходство
     if (emailStatus && passwordValue.length >= 6 && similarityPassword) {
       dispatch(Registr(emailValue, passwordValue));
+      hiddenModal();
     } else {
-      console.log('введите данные правильно');
+      console.log('введите данные правильно'); // Change
     }
   };
   const OnclickLogin = (e: React.FormEvent) => {

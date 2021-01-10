@@ -1,7 +1,6 @@
 import React, { SyntheticEvent } from 'react';
 import styles from './SingOutModal.module.scss';
 import { useDispatch } from 'react-redux';
-
 interface IProps {
   modal: boolean;
   onClickModal(e: SyntheticEvent): void;

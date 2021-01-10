@@ -8,7 +8,7 @@ type PingAction = {
 
 export const Ping = (): ThunkAction<void, any, any, PingAction> => async (dispatch) => {
   try {
-    const { data } = await axios.get('http://localhost:3051/ping');
+    const { data } = await axios.get('http://localhost:3050/ping');
     console.log(data);
     dispatch({
       type: 'PING',

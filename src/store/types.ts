@@ -1,1 +1,1 @@
-export type Actions = 'PING' | 'AUTH_REGISTR' | 'AUTH_LOGIN' | 'AUTH_OUT';
+export type Actions = 'PING' | 'AUTH_REGISTR' | 'AUTH_LOGIN' | 'AUTH_OUT' | 'INVENTORY_CHECK';

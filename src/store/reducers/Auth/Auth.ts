@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { Actions } from '../types';
+import { Actions } from '../../types';
 
 interface IState {
   isAuth: boolean;

@@ -13,6 +13,7 @@ export const CheckAuth = (): ThunkAction<void, any, any, CheckAuthAction> => asy
         authorization: `Bearer ${token}`,
       },
     });
+    console.log('ckechAuth');
 
     dispatch({
       type: 'AUTH_LOGIN',
