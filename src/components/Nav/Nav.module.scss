@@ -2,17 +2,43 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 70%;
+  width: 95%;
   margin: 0 auto;
-  font-family: 'Montserrat', sans-serif;
+  height: 7vh;
 }
 .header__list {
   display: flex;
 }
-.hedaer__logo {
-  color: #000000;
-  font-weight: 700;
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo_icon {
+  position: relative;
+  width: 25px;
+  height: 25px;
+  background: #ffffff;
+  border-radius: 4px;
+  &::before {
+    content: '';
+    transform: translate(-50%, -50%) rotate(45deg);
+    width: 12px;
+    height: 12px;
+    background: #f36122;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    bottom: 0;
+    right: 0;
+  }
+}
+.logo_text {
+  color: #ffffff;
+  font-size: 32px;
+  margin-left: 10px;
+  font-family: 'GoogleMedium', sans-serif;
 }
 .header_container {
-  background: #ffffff;
+  background: #4e535a;
 }

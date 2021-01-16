@@ -1,1 +1,1 @@
-export type ModalTypes = 'sign-in' | 'sign-up' | 'login';
+export type ModalTypes = 'sign-in' | 'login';

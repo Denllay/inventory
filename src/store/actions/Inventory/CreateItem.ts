@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { ThunkAction } from 'redux-thunk';
+import { CheckInventory } from './CheckInventory';
 
 interface IPayload {
   name: string;
@@ -14,7 +15,7 @@ export const CreateItem = ({
   count,
   cell,
   inventoryId,
-}: IPayload): ThunkAction<void, any, any, any> => async () => {
+}: IPayload): ThunkAction<void, any, any, any> => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
     const payload: IPayload[] = [
@@ -31,6 +32,7 @@ export const CreateItem = ({
         jwt: token,
       },
     });
+    dispatch(CheckInventory());
   } catch (error) {
     console.log(error);
   }

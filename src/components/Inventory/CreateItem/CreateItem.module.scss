@@ -1,0 +1,145 @@
+.create_modal {
+  width: 280px;
+  background: #4e535a;
+  height: 85vh;
+  border-radius: 15px;
+}
+.submit {
+  cursor: pointer;
+  outline: none;
+  background: #f36122;
+  border: 0;
+  color: #ffffff;
+  font-family: 'GoogleMedium', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  width: 100%;
+  border-radius: 15px 15px 0px 0px;
+  height: 32px;
+  &:hover {
+    transition: all 0.3s ease;
+    background: #d33b00;
+  }
+  &:not(:hover) {
+    transition: all 0.3s ease;
+  }
+}
+.from_content {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: 0 auto;
+  font-size: 18px;
+  font-family: 'GoogleMedium', sans-serif;
+  color: #a6a9ac;
+  margin-top: 22px;
+}
+.input {
+  color: #ffffff;
+  font-size: 16px;
+  padding: 10px 0px 10px 10px;
+  background: #373a3f;
+  border: 0;
+  outline: none;
+  border-radius: 5px;
+  &::placeholder {
+    font-family: 'GoogleRegular', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+  }
+}
+.label {
+  margin: 20px 0px 10px 0px;
+}
+.textarea {
+  resize: none;
+  height: 150%;
+  overflow-y: hidden;
+}
+.color {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  background: #ffffff;
+  margin-right: 10px;
+}
+.color_block {
+  display: flex;
+  flex-direction: column;
+}
+.color_text {
+  display: flex;
+}
+.input_color {
+  width: 40%;
+}
+.color_button {
+  cursor: pointer;
+  font-size: 16px;
+  font-family: 'GoogleRegular', sans-serif;
+  color: #ffffff;
+  background: #373a3f;
+  border-radius: 5px;
+  border: 0;
+  margin-left: 10px;
+  padding: 0px 13px;
+  outline: none;
+  &:hover {
+    transition: all 0.3s ease;
+    background: #1e1f21;
+  }
+  &:not(:hover) {
+    transition: all 0.3s ease;
+  }
+}
+.item_count {
+  background: #83868b;
+  height: 30px;
+  border-radius: 5px;
+  width: 48px;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  font-size: 18px;
+  padding-left: 5px;
+}
+.item_plus {
+  position: relative;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  margin-left: 20px;
+  :first-child {
+    background: #ffffff;
+    width: 2.5px;
+    height: 20px;
+    position: absolute;
+    transform: rotate(90deg);
+  }
+  :last-child {
+    background: #ffffff;
+    width: 2.5px;
+    height: 20px;
+    position: absolute;
+  }
+}
+.item_block {
+  display: flex;
+}
+.set_count {
+  display: flex;
+  align-items: center;
+}
+.item_minus {
+  position: relative;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  :first-child {
+    background: #ffffff;
+    width: 2.5px;
+    height: 20px;
+    transform: rotate(90deg);
+  }
+}

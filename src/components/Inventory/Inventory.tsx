@@ -1,33 +1,22 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { InventoryCreateItem } from './CreateItem/InventoryCreateItem';
 import styles from './Inventory.module.scss';
 import { InventoryItem } from './InventoryItem/InventoryItem';
 export const Inventory: React.FC = () => {
-  const inventoryItems = useSelector((state) => state?.Inventory?.items || [undefined]);
-
-  const items = inventoryItems.reduce((acc, el) => {
-    !!el && (acc[el.cell] = el);
-    return acc;
-  }, Array.from({ length: 30 }));
-
-  const InventoryGridItem = items.map((el, index) =>
-    el ? (
-      <InventoryItem
-        key={`InventoryItem-${index}`}
-        id={el.id}
-        name={el.name}
-        description={el.description}
-        count={el.count}
-      />
-    ) : (
-      <InventoryItem key={`InventoryItem-${index}`} />
-    )
-  );
+  const inventoryItems = useSelector((state) => state?.Inventory?.items || []);
+  let itemsGrid = inventoryItems.map((el, index) => {
+    return <InventoryItem key={`Inventory-${index}`} name={el.name} count={el.count} id={el.id} />;
+  });
+  console.log(itemsGrid);
 
   return (
     <div className={styles.inventory}>
-      <div className={styles.container}></div>
-      <div className={styles.container__invent}>{InventoryGridItem}</div>
+      <div className={styles.add_item}></div>
+      <div className={styles.inventory_content}>
+        <div className={styles.container__invent}>{itemsGrid}</div>
+        <InventoryCreateItem />
+      </div>
     </div>
   );
 };

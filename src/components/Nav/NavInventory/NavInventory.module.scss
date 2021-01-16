@@ -25,3 +25,18 @@
 .item {
   color: #000000;
 }
+.li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 8px;
+}
+.profile {
+  height: 41px;
+  width: 41px;
+  background: #ffffff;
+  border-radius: 100%;
+}
+.svg_exit {
+  cursor: pointer;
+}

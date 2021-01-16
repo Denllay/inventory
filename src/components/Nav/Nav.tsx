@@ -9,7 +9,10 @@ export const Nav: React.FC<IProps> = ({ isAuth }) => {
   return (
     <div className={styles.header_container}>
       <div className={styles.header__inner}>
-        <h1 className={styles.header__logo}>Inventory</h1>
+        <div className={styles.logo}>
+          <div className={styles.logo_icon}></div>
+          <h2 className={styles.logo_text}>Inventory</h2>
+        </div>
 
         {isAuth ? <NavInventory /> : <NavAuth />}
       </div>

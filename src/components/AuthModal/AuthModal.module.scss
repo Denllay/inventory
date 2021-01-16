@@ -12,56 +12,82 @@
   justify-content: center;
 }
 .container {
-  width: 40%;
-  background: #ffffff;
+  width: 45%;
+  height: 60%;
+  background: #4e535a;
   border-radius: 5px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  padding-bottom: 40px;
+  padding-top: 20px;
 }
 .form {
+  width: 85%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 95%;
   margin: 0 auto;
 }
 .container__title {
   font-size: 28px;
-  font-family: "Montserrat", sans-serif;
   font-weight: 700;
   padding: 20px 0px 20px 0px;
 }
+
+.label {
+  font-family: 'GoogleMedium', sans-serif;
+  color: #ffffff;
+  font-size: 36px;
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+}
+.label_svg {
+  margin-left: 9px;
+}
 .input {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 15px;
   border: 0;
+  padding: 15px 0px 15px 15px;
   outline: none;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 500;
-  height: 50px;
-  width: 80%;
-  border: 2px solid #e6e9ec;
-  border-radius: 5px;
-  margin: 10px 0px;
-  padding-left: 15px;
+  color: #ffffff;
+}
+.password_input {
+  margin: 18px 0px;
+}
+.button_block {
+  display: flex;
+  justify-content: space-between;
 }
 .submit {
-  margin-top: 15px;
   cursor: pointer;
-  width: 35%;
-  padding: 10px;
+  background: #56da6b;
+  color: #000;
+  font-size: 24px;
+  font-family: 'GoogleMedium', sans-serif;
   border: 0;
-  font-family: "Montserrat", sans-serif;
+  border-radius: 5px;
+  width: 124px;
+  height: 53px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   outline: none;
-  border-radius: 2px;
-  &:hover {
-    background: #141518;
-    transition: all 0.3s ease-in;
-    color: #ffffff;
-  }
-  &:not(:hover) {
-    transition: all 0.3s ease-in;
-  }
+}
+.button_acc {
+  cursor: pointer;
+  color: #ffffff;
+  background: #f36122;
+  border-radius: 5px;
+  width: 230px;
+  height: 53px;
+  border: 0;
+  font-size: 18px;
+  font-family: 'GoogleMedium', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+}
+.svg_button {
+  margin-right: 10px;
 }
 .display_none {
   display: none !important;

@@ -4,12 +4,12 @@ interface IPayload {
   email: string;
   password: string;
 }
-type RegistrAction = {
+type LoginAction = {
   type: 'AUTH_LOGIN';
   payload: IPayload;
 };
 
-export const Login = (email: string, password: string): ThunkAction<void, any, any, RegistrAction> => async (
+export const Login = (email: string, password: string): ThunkAction<void, any, any, LoginAction> => async (
   dispatch
 ) => {
   try {
