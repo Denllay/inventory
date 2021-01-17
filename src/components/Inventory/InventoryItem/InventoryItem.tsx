@@ -8,11 +8,12 @@ import { MoveItem } from '../../../store/actions/Inventory/MoveItem';
 interface IProps {
   name: string;
   count: number | string;
-  id: any;
+  id: number;
   cell: number;
+  color: string;
 }
 
-export const InventoryItem: React.FC<IProps> = ({ name, count, id, cell }) => {
+export const InventoryItem: React.FC<IProps> = ({ color, name, count, id, cell }) => {
   const dispatch = useDispatch();
   const onDeleteItem = () => {
     const Itemid = Number(id);
@@ -47,7 +48,7 @@ export const InventoryItem: React.FC<IProps> = ({ name, count, id, cell }) => {
     <div className={styles.card} ref={drag}>
       <div className={styles.card_container} style={isActive ? { ...isActiveStyle } : {}} ref={drop}>
         <div className={styles.name_block}>
-          <div className={styles.color} />
+          <div className={styles.color} style={{ background: `#${color}` }} />
           <div className={styles.text_block}>
             <div className={styles.title}>{name}</div>
             <div className={styles.count}>

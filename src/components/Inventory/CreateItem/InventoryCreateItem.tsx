@@ -14,7 +14,9 @@ export const InventoryCreateItem: React.FC = () => {
     setDesc(e.currentTarget.value);
   };
   ///
-  const onChangeName = (e: React.FormEvent<HTMLInputElement>) => setName(e.currentTarget.value);
+  const onChangeName = (e: React.FormEvent<HTMLInputElement>) => {
+    e.currentTarget.value.length < 10 && setName(e.currentTarget.value);
+  };
   const minusCount = (): void => {
     count !== 1 && setCount((count -= 1));
   };
@@ -32,10 +34,20 @@ export const InventoryCreateItem: React.FC = () => {
   };
   const onSubmitForm = (e: React.FormEvent) => {
     e.preventDefault();
-    if (name.length >= 3) {
+    if (name.length >= 3 && hex.length === 6) {
+      let itemColorAndName: string = `${hex} ${name}`;
+
       let cell = inventoryItems.items.reduce((acc, el) => (acc.cell > el.cell ? acc : el), { cell: -1 }).cell + 1;
       cell < 30 &&
-        dispatch(CreateItem({ name, description, count: Number(count), cell, inventoryId: inventoryItems.userId }));
+        dispatch(
+          CreateItem({
+            name: itemColorAndName,
+            description,
+            count: Number(count),
+            cell,
+            inventoryId: inventoryItems.userId,
+          })
+        );
       setCount(1);
       setName('');
       setDesc('');

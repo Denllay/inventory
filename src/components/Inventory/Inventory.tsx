@@ -11,8 +11,11 @@ export const Inventory: React.FC = () => {
   }, Array.from({ length: InventoryItem.length - 1 }));
 
   let itemsGrid = itemSortItem.map((el, index) => {
+    let [color] = el.name.match(/^(\w{6})/g);
+    let name = el.name.replace(/^(\w{6}) /, '');
+
     return el ? (
-      <InventoryItem key={`Inventory-${index}`} name={el.name} cell={el.cell} count={el.count} id={el.id} />
+      <InventoryItem key={`Inventory-${index}`} name={name} cell={el.cell} color={color} count={el.count} id={el.id} />
     ) : (
       false
     );
