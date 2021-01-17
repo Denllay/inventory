@@ -11,7 +11,7 @@ import { SingOut } from './store/actions/Auth/SingOut';
 import { useSelector } from 'react-redux';
 import { Inventory } from './components/Inventory/Inventory';
 import { CheckInventory } from './store/actions/Inventory/CheckInventory';
-import { CreateItemModal } from './components/CreateItemModal/CreateItemModal';
+
 export const App: React.FC = () => {
   const isAuth: boolean = useSelector((state) => state.Auth.isAuth);
   const dispatch = useDispatch();
@@ -68,11 +68,6 @@ export const App: React.FC = () => {
           hiddenModal={hiddenModalAuth}
         />
         <ConfirmModal modal={modalConfirm} onClickModal={onHiddenmodalConfirm} clickYes={SingOutYes} />
-        <CreateItemModal
-          modal={modalCreateItem}
-          onClickModal={onHiddenModalCreateItem}
-          hiddenModal={setModalCreateItem}
-        />
       </header>
     </div>
   );
