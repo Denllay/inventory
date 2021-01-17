@@ -23,7 +23,6 @@ export const Inventory: React.FC = () => {
 
   return (
     <div className={styles.inventory}>
-      <div className={styles.add_item}></div>
       <div className={styles.inventory_content}>
         <div className={styles.container__invent}>{itemsGrid}</div>
         <InventoryCreateItem />

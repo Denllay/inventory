@@ -20,10 +20,10 @@ export const InventoryItem: React.FC<IProps> = ({ color, name, count, id, cell }
     dispatch(DeleteItem(Itemid));
   };
   const [{ isDragging }, drag] = useDrag({
-    item: { cell, type: ItemTypes.ITEM },
+    item: { id, cell, type: ItemTypes.ITEM },
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult();
-      if (item && dropResult) {
+      if (item && dropResult && item.id !== dropResult.id) {
         dispatch(MoveItem(dropResult.id, item.cell));
       }
     },
