@@ -22,7 +22,7 @@ export const App: React.FC = () => {
   const [modalConfirm, setModalConfirm] = useState<ISignOut>({ type: null });
   /// ### MODAL ### ///
   const onHiddenmodalConfirm = (e: SyntheticEvent): void => {
-    e.target['id'] === 'modal' && setModalConfirm(null);
+    e.target['id'] === 'modal' && setModalConfirm({ type: null });
   };
   // Modal Auth
   const onClickModalAuth = (e: SyntheticEvent): void => {

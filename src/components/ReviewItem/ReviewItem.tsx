@@ -1,20 +1,17 @@
 import React from 'react';
 import styles from './ReviewItem.module.scss';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-interface IProps {
-  match: any;
+import { Link, RouteComponentProps } from 'react-router-dom';
+interface MatchParams {
+  id: string;
 }
-export const ReviewItem: React.FC<IProps> = ({ match }) => {
-  const Invetory = useSelector((state) => state.Inventory?.items || []);
-  const {
-    params: { id },
-  } = match;
-  let { cell, description, name = '', count } = Invetory.filter((el) => el.id == id)[0] || [];
+export const ReviewItem: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
+  const items = useSelector((state) => state.Inventory?.items || []);
+  const { id } = match.params;
+
+  let { description, name = '', count } = items.filter((el) => el.id == id)[0] || [];
   let [color] = name.match(/^(\w{6})/g) || [];
   let nickName = name.replace(/^(\w{6}) /, '') || [];
-  console.log(name);
-
   return (
     <div className={styles.review}>
       <div className={styles.container}>
