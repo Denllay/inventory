@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styles from './InventoryItem.module.scss';
 import { useDispatch } from 'react-redux';
-import { DeleteItem } from '../../../store/actions/Inventory/DeleteItem';
 import { useDrag, useDrop } from 'react-dnd';
 import { ItemTypes } from './ItemTypes';
 import { MoveItem } from '../../../store/actions/Inventory/MoveItem';
+import { Link } from 'react-router-dom';
+import { InventoryContext } from '../../../Context/InventoryContext';
 interface IProps {
   name: string;
   count: number | string;
@@ -15,9 +16,10 @@ interface IProps {
 
 export const InventoryItem: React.FC<IProps> = ({ color, name, count, id, cell }) => {
   const dispatch = useDispatch();
+  const setConfirmModal = useContext(InventoryContext);
+
   const onDeleteItem = () => {
-    const Itemid = Number(id);
-    dispatch(DeleteItem(Itemid));
+    setConfirmModal({ type: 'delete-item', payload: { id } });
   };
   const [{ isDragging }, drag] = useDrag({
     item: { id, cell, type: ItemTypes.ITEM },
@@ -57,19 +59,21 @@ export const InventoryItem: React.FC<IProps> = ({ color, name, count, id, cell }
           </div>
         </div>
         <div className={styles.block_icon}>
-          <svg
-            className={styles.icon_item}
-            width="19"
-            height="19"
-            viewBox="0 0 16 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M14.6358 16L9.1299 10.4931C6.68059 12.2345 3.30553 11.8085 1.36564 9.51327C-0.574254 7.21802 -0.431813 3.81918 1.69332 1.69429C3.8179 -0.431535 7.21707 -0.574592 9.51275 1.3652C11.8084 3.30499 12.2346 6.68038 10.4931 9.1299L15.999 14.6368L14.6368 15.999L14.6358 16ZM5.78012 1.92742C3.9532 1.92701 2.37705 3.20942 2.00592 4.99825C1.6348 6.78707 2.57071 8.59066 4.24702 9.31704C5.92332 10.0434 7.8793 9.49295 8.93071 7.99891C9.98212 6.50487 9.84 4.47789 8.59039 3.14519L9.17326 3.72323L8.51621 3.06811L8.50465 3.05655C7.78381 2.33127 6.80268 1.92466 5.78012 1.92742Z"
-              fill="white"
-            />
-          </svg>
+          <Link to={`/item/${id}`}>
+            <svg
+              className={styles.icon_item}
+              width="19"
+              height="19"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M14.6358 16L9.1299 10.4931C6.68059 12.2345 3.30553 11.8085 1.36564 9.51327C-0.574254 7.21802 -0.431813 3.81918 1.69332 1.69429C3.8179 -0.431535 7.21707 -0.574592 9.51275 1.3652C11.8084 3.30499 12.2346 6.68038 10.4931 9.1299L15.999 14.6368L14.6368 15.999L14.6358 16ZM5.78012 1.92742C3.9532 1.92701 2.37705 3.20942 2.00592 4.99825C1.6348 6.78707 2.57071 8.59066 4.24702 9.31704C5.92332 10.0434 7.8793 9.49295 8.93071 7.99891C9.98212 6.50487 9.84 4.47789 8.59039 3.14519L9.17326 3.72323L8.51621 3.06811L8.50465 3.05655C7.78381 2.33127 6.80268 1.92466 5.78012 1.92742Z"
+                fill="white"
+              />
+            </svg>
+          </Link>
           <svg
             className={styles.icon_item}
             width="18"

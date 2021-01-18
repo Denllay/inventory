@@ -7,26 +7,22 @@ import { navContext } from './Context/NavContext';
 import { useDispatch } from 'react-redux';
 import { CheckAuth } from './store/actions/Auth/CheckAuth';
 import { ConfirmModal } from './components/ConfirmModal/ConfirmModal';
-import { SingOut } from './store/actions/Auth/SingOut';
 import { useSelector } from 'react-redux';
 import { Inventory } from './components/Inventory/Inventory';
 import { CheckInventory } from './store/actions/Inventory/CheckInventory';
-
+import { Switch, Route } from 'react-router-dom';
+import { ReviewItem } from './components/ReviewItem/ReviewItem';
+import { ISignOut } from './types/signOut';
+import { InventoryContext } from './Context/InventoryContext';
 export const App: React.FC = () => {
   const isAuth: boolean = useSelector((state) => state.Auth.isAuth);
   const dispatch = useDispatch();
-  // const inventoryItems = useSelector((state) => state.Inventory);
   /// MODAL ///
   const [modalAuth, setModalAuth] = useState<ModalTypes | null>(null);
-  const [modalConfirm, setModalConfirm] = useState<boolean>(false);
-  const [modalCreateItem, setModalCreateItem] = useState<boolean>(false);
+  const [modalConfirm, setModalConfirm] = useState<ISignOut>({ type: null });
   /// ### MODAL ### ///
   const onHiddenmodalConfirm = (e: SyntheticEvent): void => {
-    e.target['id'] === 'modal' && setModalConfirm(false);
-  };
-  const SingOutYes = (): void => {
-    dispatch(SingOut());
-    setModalConfirm(false);
+    e.target['id'] === 'modal' && setModalConfirm(null);
   };
   // Modal Auth
   const onClickModalAuth = (e: SyntheticEvent): void => {
@@ -42,11 +38,6 @@ export const App: React.FC = () => {
     setModalAuth(null);
   };
   // ### Modal Auth ###
-  // Modal Item
-  const onHiddenModalCreateItem = (e: SyntheticEvent): void => {
-    e.target['id'] === 'modal' && setModalCreateItem(false);
-  };
-  // ### Modal Item ###
   useEffect(() => {
     if (localStorage.getItem('token') !== null) {
       dispatch(CheckAuth());
@@ -57,17 +48,25 @@ export const App: React.FC = () => {
   return (
     <div className="wrapper">
       <header className={styles.header}>
-        <navContext.Provider value={{ onClickModalAuth, setModalConfirm, setModalCreateItem }}>
+        <navContext.Provider value={{ onClickModalAuth, setModalConfirm }}>
           <Nav isAuth={isAuth} />
         </navContext.Provider>
-        {isAuth && <Inventory />}
+        {isAuth && (
+          <Switch>
+            <Route path="/item/:id" component={ReviewItem}></Route>
+            <InventoryContext.Provider value={setModalConfirm}>
+              <Route exact path="/" component={Inventory}></Route>
+            </InventoryContext.Provider>
+          </Switch>
+        )}
+
         <HeaderModal
           modal={modalAuth}
           onClickModalAuth={onClickModalAuth}
           onClickModal={onHiddenModalAuth}
           hiddenModal={hiddenModalAuth}
         />
-        <ConfirmModal modal={modalConfirm} onClickModal={onHiddenmodalConfirm} clickYes={SingOutYes} />
+        <ConfirmModal modal={modalConfirm} onClickModal={onHiddenmodalConfirm} setModalConfirm={setModalConfirm} />
       </header>
     </div>
   );
