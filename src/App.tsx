@@ -26,10 +26,8 @@ export const App: React.FC = () => {
   };
   // Modal Auth
   const onClickModalAuth = (e: SyntheticEvent): void => {
-    const type = (e.target as HTMLDivElement).dataset['modalName'] as ModalTypes;
-    console.log(type);
-
-    setModalAuth(type);
+    const id = e.currentTarget.id as ModalTypes;
+    setModalAuth(id);
   };
   const onHiddenModalAuth = (e: SyntheticEvent): void => {
     e.target['id'] === 'modal' && setModalAuth(null);

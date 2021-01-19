@@ -45,13 +45,18 @@
 .center_block {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   font-family: 'GoogleRegular', sans-serif;
   margin-left: 5px;
+  width: 79.5%;
 }
 .name {
   font-size: 30px;
   color: #ffffff;
   margin: 20px 0px 20px 0px;
+  border: 0;
+  outline: 0;
+  background: #252f3e;
 }
 .block_count {
   margin: 0.5% 0px 0px 10px;
@@ -75,4 +80,21 @@
   width: 80%;
   outline: none;
   height: 300px;
+}
+.svg_change {
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  margin: 0 5px;
+}
+
+.center_block_one {
+  display: flex;
+  align-items: center;
+}
+.center_block_two {
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  margin: 0 5px;
 }

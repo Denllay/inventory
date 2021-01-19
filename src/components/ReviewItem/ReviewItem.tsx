@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './ReviewItem.module.scss';
 import { useSelector } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
+import ChangeIcon from '../../assets/svg/ChangeIcon.svg';
 interface MatchParams {
   id: string;
 }
@@ -34,20 +35,25 @@ export const ReviewItem: React.FC<RouteComponentProps<MatchParams>> = ({ match }
           <h2 className={styles.title}>Account</h2>
         </div>
         <div className={styles.center_block}>
-          <div className={styles.color} style={{ background: `#${color}` }}></div>
-          <h2 className={styles.name}>{nickName}</h2>
-          <div className={styles.block_count}>
-            <h4 className={styles.count}>
-              Item: <span className={styles.count_number}>{count}</span>
-            </h4>
+          <div className={styles.center_block_one}>
+            <div className={styles.color} style={{ background: `#${color}` }}></div>
+            <h2 className={styles.name}>{nickName}</h2>
+            <div className={styles.block_count}>
+              <h4 className={styles.count}>
+                Item: <span className={styles.count_number}>{count}</span>
+              </h4>
+            </div>
+          </div>
+          <div className={styles.center_block_two}>
+            <span
+              dangerouslySetInnerHTML={{ __html: ChangeIcon }}
+              className={styles.svg_change}
+              style={{ height: 30, width: 30 }}
+            />
           </div>
         </div>
         <div className={styles.desc_block}>
-          <textarea
-            className={styles.textarea}
-            readOnly
-            value={!!description ? description : `there's nothing here`}
-          ></textarea>
+          <textarea className={styles.textarea} readOnly value={description}></textarea>
         </div>
       </div>
     </div>

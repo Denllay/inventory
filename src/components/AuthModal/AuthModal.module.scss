@@ -40,6 +40,10 @@
 }
 .label_svg {
   margin-left: 9px;
+  position: relative;
+  &:first-child {
+    margin-bottom: 6%;
+  }
 }
 .input {
   background: rgba(0, 0, 0, 0.4);
