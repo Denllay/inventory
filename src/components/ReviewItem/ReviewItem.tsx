@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './ReviewItem.module.scss';
 import { useSelector } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import ChangeIcon from '../../assets/svg/ChangeIcon.svg';
 interface MatchParams {
   id: string;
 }
@@ -11,8 +10,7 @@ export const ReviewItem: React.FC<RouteComponentProps<MatchParams>> = ({ match }
   const { id } = match.params;
 
   let { description, name = '', count } = items.filter((el) => el.id == id)[0] || [];
-  let [color] = name.match(/^(\w{6})/g) || [];
-  let nickName = name.replace(/^(\w{6}) /, '') || [];
+  const [_, color, nickName] = name.match(/(.*)(?:-|\s)(.*)/);
   return (
     <div className={styles.review}>
       <div className={styles.container}>
@@ -44,13 +42,7 @@ export const ReviewItem: React.FC<RouteComponentProps<MatchParams>> = ({ match }
               </h4>
             </div>
           </div>
-          <div className={styles.center_block_two}>
-            <span
-              dangerouslySetInnerHTML={{ __html: ChangeIcon }}
-              className={styles.svg_change}
-              style={{ height: 30, width: 30 }}
-            />
-          </div>
+          <div className={styles.center_block_two}></div>
         </div>
         <div className={styles.desc_block}>
           <textarea className={styles.textarea} readOnly value={description}></textarea>

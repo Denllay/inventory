@@ -20,11 +20,11 @@ export const CreateItem = ({
     const token = localStorage.getItem('token');
     const payload: IPayload[] = [
       {
-        name: name,
-        description: description,
-        count: count,
-        cell: cell,
-        inventoryId: inventoryId,
+        name,
+        description,
+        count,
+        cell,
+        inventoryId,
       },
     ];
     await axios.post('http://localhost:3050/inventory', payload, {

@@ -34,8 +34,8 @@ export const InventoryCreateItem: React.FC = () => {
   };
   const onSubmitForm = (e: React.FormEvent) => {
     e.preventDefault();
-    if (name.length >= 3 && hex.length === 6) {
-      let itemColorAndName: string = `${hex} ${name}`;
+    if (name.length >= 3 && name.trim() !== '' && hex.length === 6) {
+      let itemColorAndName: string = `${hex}-${name}`;
 
       let cell = inventoryItems.items.reduce((acc, el) => (acc.cell > el.cell ? acc : el), { cell: -1 }).cell + 1;
       cell < 30 &&
@@ -94,10 +94,7 @@ export const InventoryCreateItem: React.FC = () => {
             <div className={styles.item_block}>
               <div className={styles.item_count}>{count}</div>
               <div className={styles.set_count}>
-                <div className={styles.item_plus} onClick={() => setCount((count += 1))}>
-                  <div />
-                  <div />
-                </div>
+                <div className={styles.item_plus} onClick={() => setCount((count += 1))}></div>
                 <div className={styles.item_minus} onClick={minusCount}>
                   <div />
                 </div>

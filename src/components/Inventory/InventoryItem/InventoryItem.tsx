@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, Dispatch, SetStateAction } from 'react';
 import styles from './InventoryItem.module.scss';
 import { useDispatch } from 'react-redux';
 import { useDrag, useDrop } from 'react-dnd';
@@ -7,21 +7,27 @@ import { MoveItem } from '../../../store/actions/Inventory/MoveItem';
 import { Link } from 'react-router-dom';
 import { InventoryContext } from '../../../Context/InventoryContext';
 import DeleteIcon from '../../../assets/svg/DeleteIcon.svg';
+import ChangeIcon from '../../../assets/svg/ChangeIcon.svg';
 import ReviewIcon from '../../../assets/svg/ReviewIcon.svg';
+import { IBlockInventory } from '../../../types/inventoryBlock';
 interface IProps {
   name: string;
   count: number | string;
   id: number;
   cell: number;
   color: string;
+  setBlockInventory: Dispatch<SetStateAction<IBlockInventory>>;
 }
 
-export const InventoryItem: React.FC<IProps> = ({ color, name, count, id, cell }) => {
+export const InventoryItem: React.FC<IProps> = ({ color, name, count, id, cell, setBlockInventory }) => {
   const dispatch = useDispatch();
   const setConfirmModal = useContext(InventoryContext);
 
   const onDeleteItem = () => {
     setConfirmModal({ type: 'delete-item', payload: { id } });
+  };
+  const onChangeBlock = (): void => {
+    setBlockInventory({ type: 'change', payload: { id } });
   };
   const [{ isDragging }, drag] = useDrag({
     item: { id, cell, type: ItemTypes.ITEM },
@@ -65,6 +71,7 @@ export const InventoryItem: React.FC<IProps> = ({ color, name, count, id, cell }
             <span dangerouslySetInnerHTML={{ __html: ReviewIcon }} />
           </Link>
           <span onClick={onDeleteItem} dangerouslySetInnerHTML={{ __html: DeleteIcon }} className={styles.svg} />
+          <span onClick={onChangeBlock} dangerouslySetInnerHTML={{ __html: ChangeIcon }} className={styles.svg} />
         </div>
       </div>
     </div>
