@@ -21,16 +21,13 @@ export const InventoryCreateItem: React.FC = () => {
     count !== 1 && setCount((count -= 1));
   };
   const onChangeHex = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    let sucsessHex = /^[\w0-9]*$/.test(e.target.value) && e.target.value.length !== 7;
-    sucsessHex && setHex(e.target.value);
+    let sucsess = /^[\w0-9]*$/.test(e.target.value) && e.target.value.length !== 7;
+    sucsess && setHex(e.target.value);
   };
   ///
   const onRandomColor = (e: React.FormEvent): void => {
     e.preventDefault();
     setHex(Math.floor(Math.random() * 16777215).toString(16));
-  };
-  let colorStyle = {
-    background: `#${hex}`,
   };
   const onSubmitForm = (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,7 +51,9 @@ export const InventoryCreateItem: React.FC = () => {
       setHex('ffffff');
     }
   };
-
+  let colorStyle = {
+    background: `#${hex}`,
+  };
   return (
     <div className={styles.create_modal}>
       <form className={styles.form} onSubmit={onSubmitForm}>

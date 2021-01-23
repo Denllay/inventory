@@ -10,6 +10,8 @@
   "author": "Denlay",
   "license": "ISC",
   "devDependencies": {
+    "@svgr/cli": "^5.5.0",
+    "@svgr/webpack": "^5.5.0",
     "@types/node": "^14.14.0",
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
@@ -40,7 +42,6 @@
     "sass": "^1.30.0",
     "sass-loader": "^10.1.0",
     "style-loader": "^2.0.0",
-    "svg-inline-loader": "^0.8.2",
     "svg-url-loader": "^7.1.1",
     "terser-webpack-plugin": "^5.0.3",
     "ts-loader": "^8.0.5",

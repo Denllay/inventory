@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { ThunkAction } from 'redux-thunk';
+import { urlInventory3051 } from '../url';
 interface IPayload {
   email: string;
   password: string;
@@ -17,8 +18,7 @@ export const Login = (email: string, password: string): ThunkAction<void, any, a
       email,
       password,
     };
-    const { data } = await axios.post('http://localhost:3051/auth', payload);
-
+    const { data } = await axios.post(`${urlInventory3051}/auth`, payload);
     const userToken = data.data.jwt;
     localStorage.setItem('token', userToken);
 

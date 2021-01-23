@@ -7,8 +7,7 @@ module.exports = {
   mode: 'development',
   devServer: {
     contentBase: path.join(__dirname, './dist'),
-    port: 8080,
-    publicPath: '/',
+    historyApiFallback: true,
   },
   plugins: [
     // Копирование
@@ -23,5 +22,6 @@ module.exports = {
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, './dist'),
+    publicPath: '/',
   },
 };

@@ -20,7 +20,7 @@ interface IProps {
     items: [];
     userId: number;
   };
-  ChangeItem({}: IChangeItem): void;
+  ChangeItem(objectData: IChangeItem): void;
   setBlockInventory: Dispatch<SetStateAction<IBlockInventory>>;
 }
 interface IState {
@@ -37,6 +37,7 @@ interface IState {
 class InventoryChangeItem extends Component<IProps, IState> {
   constructor(props) {
     super(props);
+
     const item = props.Inventory.items.filter(({ id }) => id === props.itemId.id)[0];
     const { name, count, description, cell } = item;
     const [_, color, itemName] = name.match(/(.*)(?:-|\s)(.*)/);
@@ -55,32 +56,37 @@ class InventoryChangeItem extends Component<IProps, IState> {
 
   static getDerivedStateFromProps(props, state) {
     const item = props.Inventory.items.filter(({ id }) => id === props.itemId.id)[0];
-    const { name = '', count, description, cell } = item || ['null'];
-    const [_, color, itemName] = name.match(/(.*)(?:-|\s)(.*)/);
+    if (item !== undefined) {
+      const { name = '', count, description, cell } = item;
+      const [_, color, itemName] = name.match(/(.*)(?:-|\s)(.*)/);
 
-    if (props.itemId.id !== state.itemId) {
-      return {
-        InventoryId: props.Inventory.userId,
-        cell,
-        itemId: props.itemId.id,
-        input: {
-          itemName,
-          color,
-          description,
-          count,
-        },
-      };
+      if (props.itemId.id !== state.itemId) {
+        return {
+          InventoryId: props.Inventory.userId,
+          cell,
+          itemId: props.itemId.id,
+          input: {
+            itemName,
+            color,
+            description,
+            count,
+          },
+        };
+      }
+      return {};
+    } else {
+      props.setBlockInventory({ type: 'create' });
     }
-    return {};
   }
-  testfunc = (one: string, two: string, three: string) => ({
+  makeState = (one: string, two: string, three: string) => ({
     [one]: this.state.input[one],
     [two]: this.state.input[two],
     [three]: this.state.input[three],
   });
   handleNameChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    let inputData = this.testfunc('description', 'color', 'count');
-    e.currentTarget.value.length <= 10 &&
+    let inputData = this.makeState('description', 'color', 'count');
+    const maxLength = 10;
+    e.currentTarget.value.length <= maxLength &&
       this.setState({
         input: {
           itemName: e.currentTarget.value,
@@ -89,9 +95,10 @@ class InventoryChangeItem extends Component<IProps, IState> {
       });
   };
   handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
-    let inputData = this.testfunc('itemName', 'color', 'count');
+    let inputData = this.makeState('itemName', 'color', 'count');
     e.target.scrollTop > 0 && (e.target.style.height = e.target.scrollHeight + 'px');
-    e.currentTarget.value.length <= 300 &&
+    const maxLength = 300;
+    e.currentTarget.value.length <= maxLength &&
       this.setState({
         input: {
           description: e.currentTarget.value,
@@ -100,9 +107,9 @@ class InventoryChangeItem extends Component<IProps, IState> {
       });
   };
   handleColorChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    let inputData = this.testfunc('description', 'itemName', 'count');
-    let sucsessHex = /^[\w0-9]*$/.test(e.currentTarget.value) && e.currentTarget.value.length !== 7;
-    sucsessHex &&
+    let inputData = this.makeState('description', 'itemName', 'count');
+    let sucsess = /^[\w0-9]*$/.test(e.currentTarget.value) && e.currentTarget.value.length !== 7;
+    sucsess &&
       this.setState({
         input: {
           color: e.currentTarget.value,
@@ -111,7 +118,7 @@ class InventoryChangeItem extends Component<IProps, IState> {
       });
   };
   onRandomColor = (e: React.FormEvent): void => {
-    let inputData = this.testfunc('description', 'itemName', 'count');
+    let inputData = this.makeState('description', 'itemName', 'count');
     e.preventDefault();
     this.setState({
       input: {
@@ -121,9 +128,9 @@ class InventoryChangeItem extends Component<IProps, IState> {
     });
   };
   setCount = (e: React.SyntheticEvent<HTMLDivElement>): void => {
-    let inputData = this.testfunc('description', 'itemName', 'color');
+    let inputData = this.makeState('description', 'itemName', 'color');
     if (!(e.target instanceof HTMLDivElement)) return;
-    let meaningCount = e.target.dataset['count'] === 'plus' ? +1 : -1;
+    const meaningCount = e.target.dataset['count'] === 'plus' ? 1 : -1;
     (meaningCount === -1 && this.state.input.count > 1) || meaningCount === 1
       ? this.setState({
           input: {
@@ -140,20 +147,18 @@ class InventoryChangeItem extends Component<IProps, IState> {
     )[0];
     const [_, color, itemName] = name.match(/(.*)(?:-|\s)(.*)/);
     ///
-    const payloadName = `${this.state.input.color}-${this.state.input.itemName}`;
     const payloadCount = this.state.input.count;
     const payloadDesc = this.state.input.description;
     ///
-    let sucsessInput =
+    let sucsess =
       itemName === this.state.input.itemName &&
       color === this.state.input.color &&
-      description === this.state.input.description &&
-      count === this.state.input.count;
-    let emptyName = this.state.input.itemName !== '';
+      description === payloadDesc &&
+      count === payloadCount;
     ///
-    if (!sucsessInput && emptyName) {
+    if (!sucsess && this.state.input.itemName) {
       this.props.ChangeItem({
-        name: payloadName,
+        name: `${this.state.input.color}-${this.state.input.itemName}`,
         description: payloadDesc,
         count: payloadCount,
         itemId: this.state.itemId,

@@ -38,13 +38,6 @@
   align-items: center;
   margin-top: 16px;
 }
-.label_svg {
-  margin-left: 9px;
-  position: relative;
-  &:first-child {
-    margin-bottom: 6%;
-  }
-}
 .input {
   background: rgba(0, 0, 0, 0.4);
   border-radius: 15px;
@@ -92,7 +85,11 @@
 }
 .svg_button {
   margin-right: 10px;
+  fill: #ffffff;
 }
 .display_none {
   display: none !important;
+}
+.svg_label {
+  margin-left: 9px;
 }

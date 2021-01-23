@@ -6,10 +6,10 @@ import { ItemTypes } from './ItemTypes';
 import { MoveItem } from '../../../store/actions/Inventory/MoveItem';
 import { Link } from 'react-router-dom';
 import { InventoryContext } from '../../../Context/InventoryContext';
-import DeleteIcon from '../../../assets/svg/DeleteIcon.svg';
-import ChangeIcon from '../../../assets/svg/ChangeIcon.svg';
-import ReviewIcon from '../../../assets/svg/ReviewIcon.svg';
 import { IBlockInventory } from '../../../types/inventoryBlock';
+import SvgReviewIcon from '../../Icon/ReviewIcon';
+import SvgDeleteIcon from '../../Icon/DeleteIcon';
+import SvgChangeIcon from '../../Icon/ChangeIcon';
 interface IProps {
   name: string;
   count: number | string;
@@ -67,11 +67,11 @@ export const InventoryItem: React.FC<IProps> = ({ color, name, count, id, cell, 
           </div>
         </div>
         <div className={styles.block_icon}>
-          <Link to={`/item/${id}`} className={styles.svg}>
-            <span dangerouslySetInnerHTML={{ __html: ReviewIcon }} />
+          <Link to={`/item/${id}`}>
+            <SvgReviewIcon className={styles.svg} />
           </Link>
-          <span onClick={onDeleteItem} dangerouslySetInnerHTML={{ __html: DeleteIcon }} className={styles.svg} />
-          <span onClick={onChangeBlock} dangerouslySetInnerHTML={{ __html: ChangeIcon }} className={styles.svg} />
+          <SvgDeleteIcon onClick={onDeleteItem} className={styles.svg} />
+          <SvgChangeIcon onClick={onChangeBlock} className={styles.svg} />
         </div>
       </div>
     </div>

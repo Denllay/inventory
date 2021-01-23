@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { ThunkAction } from 'redux-thunk';
+import { urlInventory3050 } from '../url';
 import { CheckInventory } from './CheckInventory';
 interface IPayload {
   cell: number;
@@ -10,9 +11,9 @@ export const MoveItem = (itemId: number, itemMoveCell: number): ThunkAction<void
   try {
     const token = localStorage.getItem('token');
     const Payload: IPayload = {
-      cell: Number(itemMoveCell),
+      cell: itemMoveCell,
     };
-    const { data } = await axios.post(`http://localhost:3050/inventory/${itemId}`, Payload, {
+    await axios.post(`${urlInventory3050}/inventory/${itemId}`, Payload, {
       headers: {
         authorization: `Bearer ${token}`,
       },

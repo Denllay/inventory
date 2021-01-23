@@ -1,7 +1,3 @@
-interface IItemTypes {
-  ITEM: string;
-}
-
-export const ItemTypes: IItemTypes = {
+export const ItemTypes = {
   ITEM: 'item',
 };

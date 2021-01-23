@@ -4,9 +4,9 @@ import { ModalTypes } from '../../types/modals';
 import { useDispatch } from 'react-redux';
 import { Registr } from '../../store/actions/Auth/Registr';
 import { Login } from '../../store/actions/Auth/Login';
-import RegIcon from '../../assets/svg/RegIcon.svg';
-import ProfileIcon from '../../assets/svg/ProfileIcon.svg';
-import ArrowDown from '../../assets/svg/ArrowDown.svg';
+import SvgArrowDown from '../Icon/ArrowDown';
+import SvgRegIcon from '../Icon/RegIcon';
+import SvgProfileIcon from '../Icon/ProfileIcon';
 
 interface IProps {
   modal: ModalTypes | null;
@@ -15,7 +15,7 @@ interface IProps {
   onClickModalAuth(e: SyntheticEvent): void;
 }
 
-export const HeaderModal: React.FC<IProps> = ({ onClickModalAuth, modal, onClickModal, hiddenModal }) => {
+export const AuthModal: React.FC<IProps> = ({ onClickModalAuth, modal, onClickModal, hiddenModal }) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confPassword, setConfPassword] = useState<string>('');
@@ -57,11 +57,7 @@ export const HeaderModal: React.FC<IProps> = ({ onClickModalAuth, modal, onClick
         <form className={styles.form} onSubmit={modal === 'sign-in' ? OnclickReg : OnclickLogin}>
           <label className={styles.label} htmlFor="mail">
             Mail
-            <span
-              dangerouslySetInnerHTML={{ __html: ArrowDown }}
-              className={styles.label_svg}
-              style={{ height: 8, width: 14 }}
-            />
+            <SvgArrowDown className={styles.svg_label} />
           </label>
           <input
             className={styles.input}
@@ -73,11 +69,7 @@ export const HeaderModal: React.FC<IProps> = ({ onClickModalAuth, modal, onClick
           />
           <label className={styles.label} htmlFor="password">
             Password
-            <span
-              dangerouslySetInnerHTML={{ __html: ArrowDown }}
-              className={styles.label_svg}
-              style={{ height: 8, width: 14 }}
-            />
+            <SvgArrowDown className={styles.svg_label} />
           </label>
           <input
             className={`${styles.input} ${styles.password_input}`}
@@ -97,11 +89,7 @@ export const HeaderModal: React.FC<IProps> = ({ onClickModalAuth, modal, onClick
           />
           <div className={styles.button_block}>
             <button type="submit" className={styles.submit}>
-              <span
-                dangerouslySetInnerHTML={{ __html: RegIcon }}
-                className={styles.svg_button}
-                style={{ height: 24, width: 24 }}
-              />
+              <SvgRegIcon className={styles.svg_button} />
               {modal === 'sign-in' ? 'Sign in' : 'Login'}
             </button>
             <button
@@ -110,11 +98,7 @@ export const HeaderModal: React.FC<IProps> = ({ onClickModalAuth, modal, onClick
               className={styles.button_acc}
               onClick={onClickModalAuth}
             >
-              <span
-                dangerouslySetInnerHTML={{ __html: ProfileIcon }}
-                className={styles.svg_button}
-                style={{ height: 20, width: 16 }}
-              />
+              <SvgProfileIcon className={styles.svg_button} />
               {modal === 'sign-in' ? 'I have an account' : "I don't have an account"}
             </button>
           </div>

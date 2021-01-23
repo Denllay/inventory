@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { ThunkAction } from 'redux-thunk';
+import { urlInventory3050 } from '../url';
 import { CheckInventory } from './CheckInventory';
 
 type CheckAuthAction = {
@@ -9,7 +10,7 @@ type CheckAuthAction = {
 export const DeleteItem = (itemId: number): ThunkAction<void, any, any, CheckAuthAction> => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
-    await axios.delete(`http://localhost:3050/inventory/${itemId}`, {
+    await axios.delete(`${urlInventory3050}/inventory/${itemId}`, {
       headers: {
         authorization: `Bearer ${token}`,
       },

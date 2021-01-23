@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { ThunkAction } from 'redux-thunk';
+import { urlInventory3050 } from '../url';
 interface IItems {
   cell: number;
   count: number;
@@ -21,7 +22,7 @@ type CheckAuthAction = {
 export const CheckInventory = (): ThunkAction<void, any, any, CheckAuthAction> => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
-    const { data } = await axios.get('http://localhost:3050/inventory', {
+    const { data } = await axios.get(`${urlInventory3050}/inventory`, {
       headers: {
         authorization: `Bearer ${token}`,
       },

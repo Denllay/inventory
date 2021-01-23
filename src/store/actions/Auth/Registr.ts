@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { ThunkAction } from 'redux-thunk';
+import { urlInventory3051 } from '../url';
 interface IPayload {
   email: string;
   password: string;
@@ -18,7 +19,7 @@ export const Registr = (email: string, password: string): ThunkAction<void, any,
       password,
       confirmPassword: password,
     };
-    await axios.post('http://localhost:3051/register', payload);
+    await axios.post(`${urlInventory3051}/register`, payload);
 
     dispatch({
       type: 'AUTH_REGISTR',

@@ -1,7 +1,7 @@
 import React, { SyntheticEvent, useEffect, useState } from 'react';
 import { Nav } from './components/Nav/Nav';
 import styles from './App.module.scss';
-import { HeaderModal } from './components/AuthModal/AuthModal';
+import { AuthModal } from './components/AuthModal/AuthModal';
 import { ModalTypes } from './types/modals';
 import { navContext } from './Context/NavContext';
 import { useDispatch } from 'react-redux';
@@ -58,7 +58,7 @@ export const App: React.FC = () => {
           </Switch>
         )}
 
-        <HeaderModal
+        <AuthModal
           modal={modalAuth}
           onClickModalAuth={onClickModalAuth}
           onClickModal={onHiddenModalAuth}
