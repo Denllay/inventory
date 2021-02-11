@@ -1,8 +1,6 @@
 const path = require('path');
-const { default: merge } = require('webpack-merge');
 const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const Base = require('./webpack.base');
 module.exports = {
   mode: 'development',
   devServer: {

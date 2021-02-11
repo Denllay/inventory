@@ -9,12 +9,14 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { BrowserRouter } from 'react-router-dom';
 const root = document.getElementById('root');
 ReactDom.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <DndProvider backend={HTML5Backend}>
-        <App />
-      </DndProvider>
-    </BrowserRouter>
-  </Provider>,
+  <React.StrictMode>
+    <Provider store={store}>
+      <BrowserRouter>
+        <DndProvider backend={HTML5Backend}>
+          <App />
+        </DndProvider>
+      </BrowserRouter>
+    </Provider>
+  </React.StrictMode>,
   root
 );

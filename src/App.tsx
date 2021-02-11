@@ -44,7 +44,7 @@ export const App: React.FC = () => {
   });
 
   return (
-    <div className="wrapper">
+    <div className={styles.wrapper}>
       <header className={styles.header}>
         <navContext.Provider value={{ onClickModalAuth, setModalConfirm }}>
           <Nav isAuth={isAuth} />
@@ -57,7 +57,6 @@ export const App: React.FC = () => {
             </InventoryContext.Provider>
           </Switch>
         )}
-
         <AuthModal
           modal={modalAuth}
           onClickModalAuth={onClickModalAuth}

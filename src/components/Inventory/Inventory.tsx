@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { IBlockInventory } from '../../types/inventoryBlock';
-import InventoryChangeItem from './ChangeItem/InventoryChangeItem';
-import { InventoryCreateItem } from './CreateItem/InventoryCreateItem';
 import styles from './Inventory.module.scss';
+import { InventoryInteraction } from './InventoryInteraction/InventoryInteraction';
 import { InventoryItem } from './InventoryItem/InventoryItem';
 export const Inventory: React.FC = () => {
   const inventoryItems = useSelector((state) => state?.Inventory?.items || []);
@@ -36,11 +35,7 @@ export const Inventory: React.FC = () => {
     <div className={styles.inventory}>
       <div className={styles.inventory_content}>
         <div className={styles.container__invent}>{itemsGrid}</div>
-        {blockInventory.type === 'create' ? (
-          <InventoryCreateItem />
-        ) : (
-          <InventoryChangeItem itemId={blockInventory.payload} setBlockInventory={setBlockInventory} />
-        )}
+        <InventoryInteraction blockInventory={blockInventory} setBlockInventory={setBlockInventory} />
       </div>
     </div>
   );

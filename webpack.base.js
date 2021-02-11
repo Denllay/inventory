@@ -12,6 +12,7 @@ module.exports = {
           },
         },
       },
+      // СВГ
       {
         test: /\.svg$/,
         use: ['@svgr/webpack', 'file-loader'],
