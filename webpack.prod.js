@@ -8,9 +8,6 @@ module.exports = {
     filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
   },
-  optimization: {
-    minimizer: [new OptimizeCssAssetsPlugin()],
-  },
   plugins: [
     new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
     new HtmlWebpackPlugin({
@@ -22,12 +19,4 @@ module.exports = {
       },
     }),
   ],
-  module: {
-    rules: [
-      {
-        test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
-      },
-    ],
-  },
 };
